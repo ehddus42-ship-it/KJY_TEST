@@ -11,6 +11,14 @@ function loadDb() {
   return dbModulePromise;
 }
 
+const DB_TIMEOUT_MS = 10000;
+function withTimeout(promise, ms) {
+  return Promise.race([
+    promise,
+    new Promise((_, reject) => setTimeout(() => reject(new Error("timeout")), ms)),
+  ]);
+}
+
 const screen = document.getElementById("screen");
 const message = document.getElementById("message");
 const startBtn = document.getElementById("start-btn");
@@ -29,8 +37,8 @@ function setScreenClass(className) {
 async function renderRanking() {
   rankingList.innerHTML = "<li>불러오는 중...</li>";
   try {
-    const { getTop } = await loadDb();
-    const top = await getTop(10);
+    const { getTop } = await withTimeout(loadDb(), DB_TIMEOUT_MS);
+    const top = await withTimeout(getTop(10), DB_TIMEOUT_MS);
     if (top.length === 0) {
       rankingList.innerHTML = "<li>아직 기록이 없습니다</li>";
       return;
@@ -110,13 +118,16 @@ resultPanel.addEventListener("click", (e) => e.stopPropagation());
 nicknameForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   const nickname = nicknameInput.value.trim();
-  if (!nickname) return;
+  if (!nickname) {
+    saveStatus.textContent = "닉네임을 입력해주세요.";
+    return;
+  }
 
   const currentMs = parseInt(resultMs.textContent, 10);
   saveStatus.textContent = "저장 중...";
   try {
-    const { saveScore } = await loadDb();
-    await saveScore(currentMs, nickname);
+    const { saveScore } = await withTimeout(loadDb(), DB_TIMEOUT_MS);
+    await withTimeout(saveScore(currentMs, nickname), DB_TIMEOUT_MS);
     saveStatus.textContent = "기록이 저장되었습니다!";
     nicknameForm.classList.add("hidden");
     renderRanking();
