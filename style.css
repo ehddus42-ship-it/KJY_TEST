@@ -1,0 +1,126 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+}
+
+.screen {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.1s ease-out;
+  background-color: #2563eb;
+  user-select: none;
+}
+
+.screen.state-waiting {
+  background-color: #2563eb;
+}
+
+.screen.state-red {
+  background-color: #dc2626;
+}
+
+.screen.state-fail {
+  background-color: #1f2937;
+}
+
+.screen.state-result {
+  background-color: #16a34a;
+}
+
+#center {
+  text-align: center;
+  color: #ffffff;
+  padding: 24px;
+  max-width: 480px;
+}
+
+#title {
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+
+#message {
+  font-size: 1.1rem;
+  margin-bottom: 24px;
+}
+
+button {
+  font-size: 1.1rem;
+  padding: 12px 28px;
+  border: none;
+  border-radius: 8px;
+  background-color: #ffffff;
+  color: #111827;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+.hidden {
+  display: none !important;
+}
+
+#result-ms {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+#nickname-form {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+#nickname-input {
+  font-size: 1rem;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: none;
+  min-width: 0;
+  flex: 1;
+}
+
+#save-status {
+  min-height: 1.4em;
+  font-size: 0.95rem;
+}
+
+#ranking {
+  margin-top: 16px;
+  text-align: left;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  padding: 12px 20px;
+}
+
+#ranking h2 {
+  font-size: 1rem;
+  margin: 0 0 8px 0;
+}
+
+#ranking-list {
+  margin: 0;
+  padding-left: 20px;
+  font-size: 0.95rem;
+}
+
+#retry-btn {
+  margin-top: 20px;
+}
