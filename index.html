@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>반응속도 측정기</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main id="screen" class="screen state-idle">
+    <div id="center">
+      <h1 id="title">반응속도 측정기</h1>
+      <p id="message">버튼을 눌러 게임을 시작하세요</p>
+
+      <button id="start-btn" type="button">시작하기</button>
+
+      <div id="result-panel" class="hidden">
+        <p id="result-ms"></p>
+
+        <form id="nickname-form">
+          <input id="nickname-input" type="text" maxlength="12" placeholder="닉네임을 입력하세요" autocomplete="off" required />
+          <button type="submit">기록 저장</button>
+        </form>
+        <p id="save-status"></p>
+
+        <div id="ranking">
+          <h2>최고 기록 TOP 10</h2>
+          <ol id="ranking-list"></ol>
+        </div>
+      </div>
+
+      <button id="retry-btn" class="hidden" type="button">다시 시작</button>
+    </div>
+  </main>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
